@@ -9,9 +9,27 @@ const monocraft = localFont({
   display: "swap",
 });
 
+const title = profile.name;
+const description = `${profile.role} — terminal portfolio of ${profile.name}.`;
+
 export const metadata: Metadata = {
-  title: `${profile.name} // ${profile.handle}`,
-  description: `${profile.role} — terminal portfolio of ${profile.name}.`,
+  // Set NEXT_PUBLIC_SITE_URL in prod so OG/Twitter image URLs are absolute.
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+  ),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName: profile.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export const viewport: Viewport = {

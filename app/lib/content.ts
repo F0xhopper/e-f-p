@@ -12,15 +12,16 @@ export const profile = {
   location: "EARTH // GMT",
   links: [
     { label: "EMAIL", href: "mailto:foxhopper16@gmail.com", text: "foxhopper16@gmail.com" },
-    { label: "GITHUB", href: "https://github.com/", text: "github.com/e-f-p" },
-    { label: "TWITTER/X", href: "https://x.com/", text: "@e_f_p" },
+    { label: "GITHUB", href: "https://github.com/e-f-p", text: "github.com/e-f-p" },
+    { label: "LINKEDIN", href: "https://linkedin.com/in/eden-fox-phillips", text: "linkedin.com/in/eden-fox-phillips" },
   ],
 };
 
 export const about = [
-  "I design and build interfaces, tools, and the occasional ridiculous experiment.",
+  "I'm a builder.",
+  "I design and ship tools, interfaces, and the occasional ridiculous experiment.",
   "I like systems that feel like instruments -- fast, legible, a little bit retro.",
-  "This page is a terminal. Scroll through the transmission. Everything below is real work (swap in your own).",
+  "This page is a terminal. Scroll the transmission -- everything below is real work.",
 ];
 
 export type Project = {
@@ -30,6 +31,9 @@ export type Project = {
   role: string;
   stack: string[];
   description: string[];
+  visibility?: "public" | "private"; // renders a [public]/[private] tag
+  outcome?: string; // one terse impact line, e.g. "shipped to the App Store"
+  image?: string; // screenshot path, e.g. "/projects/lumen.png"
   links?: { label: string; href: string }[];
 };
 
@@ -38,8 +42,11 @@ export const projects: Project[] = [
     id: "01",
     title: "LUMEN",
     year: "2026",
-    role: "Solo build // Public",
+    role: "Solo build",
     stack: ["TypeScript"],
+    visibility: "public",
+    // outcome: "", // add a real metric, e.g. "1k+ passages indexed"
+    // image: "/projects/lumen.png",
     description: [
       "A study companion for the Summa Theologica: full text, semantic search,",
       "notes, and an agent that reasons over the corpus alongside you.",
@@ -49,8 +56,11 @@ export const projects: Project[] = [
     id: "02",
     title: "ALTUM",
     year: "2026",
-    role: "Solo build // Public",
+    role: "Solo build",
     stack: ["Go"],
+    visibility: "public",
+    // outcome: "",
+    // image: "/projects/altum.png",
     description: [
       "A minimalist CLI deep work companion for the terminal. No noise --",
       "just you, a timer, and the work.",
@@ -60,8 +70,11 @@ export const projects: Project[] = [
     id: "03",
     title: "PERITUS",
     year: "2026",
-    role: "Solo build // Public",
+    role: "Solo build",
     stack: ["Python"],
+    visibility: "public",
+    // outcome: "",
+    // image: "/projects/peritus.png",
     description: [
       "CLI tool that fetches, validates, and graphs multi-source research on a",
       "topic, then lets you chat with a generated expert persona grounded in",
@@ -73,6 +86,8 @@ export const projects: Project[] = [
     title: "STUDIO APPLY",
     year: "2026",
     role: "Design + Engineering",
+    // outcome: "", // e.g. "live on the Shopify App Store"
+    // image: "/projects/studio-apply.png",
     stack: [
       "Node.js",
       "TypeScript",
