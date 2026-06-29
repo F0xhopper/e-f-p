@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# e-f-p // terminal portfolio
 
-## Getting Started
+A black, TUI-style portfolio: monospace ASCII banner, CRT scanlines, a boot-log
+intro, an exhibition-catalogue project index, and terminal-window project cards.
+Built with Next.js 16 (App Router) + Tailwind v4 + IBM Plex Mono.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # dev server (http://localhost:3000)
+npm run build   # production build
+npm run start   # serve the build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Make it yours
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything you see comes from **one file**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/lib/content.ts` — your name, role, links, about text, and the `projects`
+  array (id, title, tagline, year, role, stack, description, image, links).
 
-## Learn More
+To add a project: append an object to the `projects` array with a unique
+two-digit `id`. To add its image, drop the file in `public/projects/` and point
+`image` at it, e.g. `image: "/projects/my-thing.png"`.
 
-To learn more about Next.js, take a look at the following resources:
+### Where things live
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Piece                   | File                               |
+| ----------------------- | ---------------------------------- |
+| Content / projects      | `app/lib/content.ts`               |
+| ASCII "EFP" banner      | `app/components/Banner.tsx`        |
+| Boot-log typewriter     | `app/components/TerminalIntro.tsx` |
+| Project index (leaders) | `app/components/ProjectIndex.tsx`  |
+| Project cards           | `app/components/ProjectEntry.tsx`  |
+| CRT scanline overlay    | `app/components/CRT.tsx`           |
+| Theme / colors / CRT    | `app/globals.css`                  |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Tweaks
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Colors** (phosphor green, amber, dims): the `:root` block in
+  `app/globals.css`.
+- **Banner text**: replace the `MONOGRAM` art in `app/components/Banner.tsx`
+  (use a true monospace ASCII font so block glyphs stay aligned).
+- **Turn off scanlines/flicker**: remove `<CRT />` from `app/layout.tsx`.

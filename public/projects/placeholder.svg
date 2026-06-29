@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="project image placeholder">
+  <rect width="640" height="400" fill="#000000"/>
+  <g fill="none" stroke="#1c1c1c" stroke-width="1">
+    <path d="M0 40 H640 M0 80 H640 M0 120 H640 M0 160 H640 M0 200 H640 M0 240 H640 M0 280 H640 M0 320 H640 M0 360 H640"/>
+    <path d="M40 0 V400 M80 0 V400 M120 0 V400 M160 0 V400 M200 0 V400 M240 0 V400 M280 0 V400 M320 0 V400 M360 0 V400 M400 0 V400 M440 0 V400 M480 0 V400 M520 0 V400 M560 0 V400 M600 0 V400"/>
+  </g>
+  <text x="320" y="186" font-family="ui-monospace, monospace" font-size="26" fill="#6ee787" text-anchor="middle" letter-spacing="4">[ NO SIGNAL ]</text>
+  <text x="320" y="222" font-family="ui-monospace, monospace" font-size="14" fill="#8a8a8a" text-anchor="middle" letter-spacing="2">drop image into /public/projects/</text>
+</svg>

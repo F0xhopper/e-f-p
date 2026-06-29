@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ *
+ *  e-f-p // plain terminal: monospace text, white on black.
+ * ------------------------------------------------------------------ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #000000;
+  --fg: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --font-mono: var(--font-monocraft), ui-monospace, "SFMono-Regular", "Menlo",
+    monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 0, "calt" 0; /* keep glyphs literal */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tailwind's preflight resets pre/code/kbd/samp to the browser's default
+   monospace stack. Override so our ASCII art inherits Monocraft. */
+pre,
+code,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 0, "calt" 0;
+  font-size: inherit;
+}
+
+/* Responsive terminal: scale the font so the fixed ~44-column ASCII art
+   always fits the viewport (down to small phones), capping at 1rem on
+   wider screens. Keeps perfect monospace alignment without overflow. */
+.term {
+  font-size: clamp(0.58rem, calc((100vw - 2rem) / 30), 1rem);
+  line-height: 1.5;
+}
+
+/* inverse selection, like a terminal cursor sweep */
+::selection {
+  background: #ffffff;
+  color: #000000;
 }
