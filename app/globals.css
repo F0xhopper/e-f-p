@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ *
- *  e-f-p // plain terminal: monospace text, white on black.
+ *  e-f-p // plain terminal: monospace text, near-white on near-black.
+ *  Two tones only: fg for content, fg-dim for metadata.
  * ------------------------------------------------------------------ */
 
 :root {
   --bg: #000000;
-  --fg: #ffffff;
+  --fg: #e6e6e6;
+  --fg-dim: #8a8a8a;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-fg: var(--fg);
+  --color-fg-dim: var(--fg-dim);
   --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Consolas",
     "Liberation Mono", monospace;
 }
@@ -34,7 +37,7 @@ body {
 }
 
 /* Tailwind's preflight resets pre/code/kbd/samp to the browser's default
-   monospace stack. Override so our ASCII art inherits the site's mono font. */
+   monospace stack. Override so they inherit the site's mono font. */
 pre,
 code,
 kbd,
@@ -44,27 +47,48 @@ samp {
   font-size: inherit;
 }
 
-/* Responsive terminal: scale the font so the fixed ~44-column ASCII art
-   always fits the viewport (down to small phones), capping at 1rem on
-   wider screens. Keeps perfect monospace alignment without overflow. */
 .term {
-  font-size: clamp(0.58rem, calc((100vw - 2rem) / 30), 1rem);
-  line-height: 1.5;
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.6;
 }
 
 /* inverse selection, like a terminal cursor sweep */
 ::selection {
-  background: #ffffff;
-  color: #000000;
+  background: var(--fg);
+  color: var(--bg);
 }
 
-/* Links are underlined white; on hover the cursor "sweeps" the cell —
-   the text color becomes the background and the glyph goes black. */
+/* Links are underlined, with the line dropped clear of descenders;
+   on hover or keyboard focus the cursor "sweeps" the cell -- the cell
+   inverts and the glyph goes dark. */
 .term a {
   color: var(--fg);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
 }
-.term a:hover {
+.term a:hover,
+.term a:focus-visible {
   background: currentColor;
   color: var(--bg);
   text-decoration: none;
+  outline: none;
+}
+
+/* Screenshots are pre-dithered to 1-bit (scripts/dither.mjs) and shown
+   at their intrinsic pixel size -- an integer scale, so every dither dot
+   stays uniform. Stretching to the column would land on a fractional
+   scale and render the grain unevenly (moire). Only narrow viewports
+   shrink them, where high-DPR screens hide the remainder. */
+.term img {
+  max-width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/* Responsive banner: scale ONLY the ASCII art so its ~45 fixed columns
+   always fit the viewport, capping at the body size on wider screens.
+   Body text stays at a fixed, readable size everywhere. */
+.banner {
+  font-size: clamp(0.5rem, calc((100vw - 2rem) / 28), 0.9375rem);
+  line-height: 1.3;
 }

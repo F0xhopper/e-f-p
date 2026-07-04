@@ -1,106 +1,121 @@
 /* ================================================================== *
  *  EDIT THIS FILE TO MAKE THE SITE YOURS.
  *  Everything the portfolio renders comes from the data below.
- *  Drop project images into /public/projects/ and reference them
- *  by path, e.g. "/projects/my-thing.png".
  * ================================================================== */
 
 export const profile = {
-  name: "EDEN FOX PHILLIPS",
+  name: "eden fox phillips",
   handle: "e-f-p",
-  role: "Designer / Developer / Maker",
-  location: "EARTH // GMT",
+  role: "designer / developer / maker",
   links: [
-    { label: "EMAIL", href: "mailto:foxhopper16@gmail.com", text: "foxhopper16@gmail.com" },
-    { label: "GITHUB", href: "https://github.com/e-f-p", text: "github.com/e-f-p" },
-    { label: "LINKEDIN", href: "https://linkedin.com/in/eden-fox-phillips", text: "linkedin.com/in/eden-fox-phillips" },
+    { label: "email", href: "mailto:foxhopper16@gmail.com", text: "foxhopper16@gmail.com" },
+    { label: "github", href: "https://github.com/e-f-p", text: "e-f-p" },
+    { label: "linkedin", href: "https://linkedin.com/in/eden-fox-phillips", text: "eden-fox-phillips" },
   ],
 };
 
 export const about = [
-  "I'm a builder.",
   "I design and ship tools, interfaces, and the occasional ridiculous experiment.",
   "I like systems that feel like instruments -- fast, legible, a little bit retro.",
-  "This page is a terminal. Scroll the transmission -- everything below is real work.",
 ];
 
 export type Project = {
   id: string; // 2-digit catalogue id, e.g. "01"
   title: string;
-  role: string;
   stack: string[];
   description: string[];
-  visibility?: "public" | "private"; // renders a [public]/[private] tag
-  outcome?: string; // one terse impact line, e.g. "shipped to the App Store"
-  image?: string; // screenshot path, e.g. "/projects/lumen.png"
   links?: { label: string; href: string }[];
+  /* 1-bit dithered screenshot. Drop the original in assets/screenshots/
+     and run `npm run dither`; it lands in public/projects/ at the
+     width/height the script prints. */
+  image?: { src: string; alt: string; width: number; height: number };
 };
 
 export const projects: Project[] = [
   {
     id: "01",
-    title: "LUMEN",
-    role: "Solo build",
-    stack: ["TypeScript"],
-    visibility: "public",
-    // outcome: "", // add a real metric, e.g. "1k+ passages indexed"
-    // image: "/projects/lumen.png",
+    title: "lumen",
+    stack: ["typescript", "next.js", "postgres", "pgvector", "claude api"],
     links: [{ label: "code", href: "https://github.com/e-f-p/lumen" }],
     description: [
       "A study companion for the Summa Theologica: full text, semantic search,",
       "notes, and an agent that reasons over the corpus alongside you.",
     ],
+    image: {
+      src: "/projects/github-profile.png",
+      alt: "dithered screenshot of a github profile page",
+      width: 320,
+      height: 198,
+    },
   },
   {
     id: "02",
-    title: "ALTUM",
-    role: "Solo build",
-    stack: ["Go"],
-    visibility: "public",
-    // outcome: "",
-    // image: "/projects/altum.png",
+    title: "altum",
+    stack: ["go", "bubbletea", "sqlite"],
     links: [{ label: "code", href: "https://github.com/e-f-p/altum" }],
     description: [
       "A minimalist CLI deep work companion for the terminal. No noise --",
       "just you, a timer, and the work.",
     ],
+    image: {
+      src: "/projects/st-paul-hermit.png",
+      alt: "dithered painting of st paul the hermit at his desk",
+      width: 320,
+      height: 388,
+    },
   },
   {
     id: "03",
-    title: "PERITUS",
-    role: "Solo build",
-    stack: ["Python"],
-    visibility: "public",
-    // outcome: "",
-    // image: "/projects/peritus.png",
+    title: "peritus",
+    stack: ["python", "networkx", "claude api"],
     links: [{ label: "code", href: "https://github.com/e-f-p/peritus" }],
     description: [
       "CLI tool that fetches, validates, and graphs multi-source research on a",
       "topic, then lets you chat with a generated expert persona grounded in",
       "that corpus.",
     ],
+    image: {
+      src: "/projects/youtube.png",
+      alt: "dithered screenshot of a youtube watch page",
+      width: 320,
+      height: 208,
+    },
   },
   {
     id: "04",
-    title: "STUDIO APPLY",
-    role: "Design + Engineering",
-    // outcome: "", // e.g. "live on the Shopify App Store"
-    // image: "/projects/studio-apply.png",
+    title: "studio apply",
+    stack: ["typescript", "next.js", "supabase", "tailwind", "vercel"],
     links: [{ label: "site", href: "https://studioapply.com" }],
-    stack: [
-      "Node.js",
-      "TypeScript",
-      "Next.js",
-      "NestJS",
-      "Supabase",
-      "Turborepo",
-      "Tailwind CSS",
-      "Fly.io",
-    ],
     description: [
-      "Full-stack studio and client portal for creative agencies -- projects,",
-      "tasks, leads, forms, email campaigns, and invoices in one place, with",
-      "optional multi-tenant subdomains and branding per studio.",
+      "Full-stack studio and client portal for creative agencies, with",
+      "multi-tenant subdomains and per-studio branding.",
+    ],
+    image: {
+      src: "/projects/servants-of-mary.png",
+      alt: "dithered screenshot of the servants of mary site hero",
+      width: 320,
+      height: 233,
+    },
+  },
+  {
+    id: "05",
+    title: "atlas temporum",
+    stack: ["typescript", "next.js", "maplibre", "go", "postgis"],
+    links: [{ label: "code", href: "https://github.com/F0xhopper/Atlas-Temporum" }],
+    description: [
+      "Interactive map of medieval Britain, 1000--1500. One control drives",
+      "everything -- slide the timeline year and watch the map change.",
+    ],
+  },
+  {
+    id: "06",
+    title: "importo",
+    stack: ["typescript", "shopify api", "docker"],
+    links: [{ label: "code", href: "https://github.com/F0xhopper/Importo" }],
+    description: [
+      "Drag-and-drop Shopify importer -- turns PDF catalogs, spreadsheets,",
+      "and images into ready-to-sell products with titles, prices, variants,",
+      "and inventory extracted automatically.",
     ],
   },
 ];

@@ -1,12 +1,11 @@
+import Image from "next/image";
 import Banner from "./components/Banner";
 import { about, profile, projects } from "./lib/content";
 
-const WIDTH = 44;
-
 /* A section: just breathing room, no header -- the row labels inside
-   (about / project titles / contact labels) already say what it is. */
+   (project titles / contact labels) already say what it is. */
 function Box({ children }: { children: React.ReactNode }) {
-  return <div className="mt-8 pl-2">{children}</div>;
+  return <div className="mt-8">{children}</div>;
 }
 
 /* A help-menu row: fixed-width label on the left, content flowing and
@@ -32,23 +31,16 @@ function Row({
 
 export default function Home() {
   const labelWidth = Math.max(
-    "about".length,
     ...projects.map((p) => p.title.length),
     ...profile.links.map((l) => l.label.length)
   );
 
   return (
-    <main className="term mx-auto max-w-2xl px-4 py-8 text-fg">
-      <pre>{"-".repeat(WIDTH)}</pre>
-
-      <div className="mt-4">
-        <Banner />
-      </div>
+    <main className="term mx-auto max-w-[72ch] px-4 py-12 text-fg">
+      <Banner />
 
       <Box>
-        <Row label="about" width={labelWidth}>
-          <p>{about.join(" ")}</p>
-        </Row>
+        <p>{about.join(" ")}</p>
       </Box>
 
       <Box>
@@ -69,11 +61,19 @@ export default function Home() {
           return (
             <div key={p.id} className={i > 0 ? "mt-6" : undefined}>
               <Row label={title} width={labelWidth}>
-                <p>
-                  {p.description.join(" ")}
-                  {p.visibility && ` [${p.visibility}]`}
-                </p>
-                <p className="mt-1">stack: {p.stack.join(" / ")}</p>
+                <p>{p.description.join(" ")}</p>
+                {p.image && (
+                  <Image
+                    src={p.image.src}
+                    alt={p.image.alt}
+                    width={p.image.width}
+                    height={p.image.height}
+                    unoptimized // resampling would smear the 1-bit dither
+                    className="mt-3"
+                  />
+                )}
+                {/* stack rendered as a shell comment: dim aside, not content */}
+                <p className="mt-1 text-fg-dim"># {p.stack.join(" · ")}</p>
               </Row>
             </div>
           );

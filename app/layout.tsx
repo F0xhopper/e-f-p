@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { profile } from "./lib/content";
 
+/* Tab title reads as a shell prompt; shares/search keep the plain name. */
+const tabTitle = `eden@${profile.handle}:~`;
 const title = profile.name;
 const description = `${profile.role} — terminal portfolio of ${profile.name}.`;
 
@@ -10,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
   ),
-  title,
+  title: tabTitle,
   description,
   openGraph: {
     title,
