@@ -27,7 +27,6 @@ export const about = [
 export type Project = {
   id: string; // 2-digit catalogue id, e.g. "01"
   title: string;
-  year: string;
   role: string;
   stack: string[];
   description: string[];
@@ -41,12 +40,12 @@ export const projects: Project[] = [
   {
     id: "01",
     title: "LUMEN",
-    year: "2026",
     role: "Solo build",
     stack: ["TypeScript"],
     visibility: "public",
     // outcome: "", // add a real metric, e.g. "1k+ passages indexed"
     // image: "/projects/lumen.png",
+    links: [{ label: "code", href: "https://github.com/e-f-p/lumen" }],
     description: [
       "A study companion for the Summa Theologica: full text, semantic search,",
       "notes, and an agent that reasons over the corpus alongside you.",
@@ -55,12 +54,12 @@ export const projects: Project[] = [
   {
     id: "02",
     title: "ALTUM",
-    year: "2026",
     role: "Solo build",
     stack: ["Go"],
     visibility: "public",
     // outcome: "",
     // image: "/projects/altum.png",
+    links: [{ label: "code", href: "https://github.com/e-f-p/altum" }],
     description: [
       "A minimalist CLI deep work companion for the terminal. No noise --",
       "just you, a timer, and the work.",
@@ -69,12 +68,12 @@ export const projects: Project[] = [
   {
     id: "03",
     title: "PERITUS",
-    year: "2026",
     role: "Solo build",
     stack: ["Python"],
     visibility: "public",
     // outcome: "",
     // image: "/projects/peritus.png",
+    links: [{ label: "code", href: "https://github.com/e-f-p/peritus" }],
     description: [
       "CLI tool that fetches, validates, and graphs multi-source research on a",
       "topic, then lets you chat with a generated expert persona grounded in",
@@ -84,10 +83,10 @@ export const projects: Project[] = [
   {
     id: "04",
     title: "STUDIO APPLY",
-    year: "2026",
     role: "Design + Engineering",
     // outcome: "", // e.g. "live on the Shopify App Store"
     // image: "/projects/studio-apply.png",
+    links: [{ label: "site", href: "https://studioapply.com" }],
     stack: [
       "Node.js",
       "TypeScript",

@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { profile } from "./lib/content";
-
-const monocraft = localFont({
-  src: "./fonts/Monocraft.ttf",
-  variable: "--font-monocraft",
-  display: "swap",
-});
 
 const title = profile.name;
 const description = `${profile.role} — terminal portfolio of ${profile.name}.`;
@@ -42,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${monocraft.variable} h-full`}>
+    <html lang="en" className="h-full">
       <body className="min-h-full bg-bg text-fg antialiased">
         {children}
       </body>

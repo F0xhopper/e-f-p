@@ -1,69 +1,99 @@
 import Banner from "./components/Banner";
-import ProjectEntry from "./components/ProjectEntry";
 import { about, profile, projects } from "./lib/content";
 
 const WIDTH = 44;
 
-/* An ASCII section rule: ==[ LABEL ]==================== */
-function Section({ label }: { label: string }) {
-  const tail = "=".repeat(Math.max(0, WIDTH - `==[ ${label} ]`.length));
+/* A section: just breathing room, no header -- the row labels inside
+   (about / project titles / contact labels) already say what it is. */
+function Box({ children }: { children: React.ReactNode }) {
+  return <div className="mt-8 pl-2">{children}</div>;
+}
+
+/* A help-menu row: fixed-width label on the left, content flowing and
+   wrapping on the right -- aligned to the same column across the page. */
+function Row({
+  label,
+  width,
+  children,
+}: {
+  label: React.ReactNode;
+  width: number;
+  children: React.ReactNode;
+}) {
   return (
-    <pre className="mt-8 mb-3 text-dim">
-      ==[ <span className="text-fg">{label}</span> ]{tail}
-    </pre>
+    <div className="flex gap-6">
+      <p className="shrink-0" style={{ width: `${width}ch` }}>
+        {label}
+      </p>
+      <div className="min-w-0">{children}</div>
+    </div>
   );
 }
 
-/* A blank line, like pressing enter in a terminal. */
-function Gap() {
-  return <p>&nbsp;</p>;
-}
-
 export default function Home() {
+  const labelWidth = Math.max(
+    "about".length,
+    ...projects.map((p) => p.title.length),
+    ...profile.links.map((l) => l.label.length)
+  );
+
   return (
-    <main className="term mx-auto max-w-2xl px-4 py-8">
-      <Banner />
-      <pre className="mt-3 text-dim">{"=".repeat(WIDTH)}</pre>
+    <main className="term mx-auto max-w-2xl px-4 py-8 text-fg">
+      <pre>{"-".repeat(WIDTH)}</pre>
 
-      <p className="mt-3 text-fg">{profile.name}</p>
-      <p className="text-mute">{profile.role}</p>
-      <p className="text-dim">
-        <span className="text-fg">{profile.handle}</span> | {profile.location}
-      </p>
+      <div className="mt-4">
+        <Banner />
+      </div>
 
-      <Section label="ABOUT" />
-      {about.map((line, i) => (
-        <p key={i}>{line}</p>
-      ))}
+      <Box>
+        <Row label="about" width={labelWidth}>
+          <p>{about.join(" ")}</p>
+        </Row>
+      </Box>
 
-      <Section label="PROJECTS" />
-      {projects.map((p) => (
-        <ProjectEntry key={p.id} project={p} width={WIDTH} />
-      ))}
+      <Box>
+        {projects.map((p, i) => {
+          const link = p.links?.[0];
+          const title = link ? (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              {p.title}
+            </a>
+          ) : (
+            p.title
+          );
+          return (
+            <div key={p.id} className={i > 0 ? "mt-6" : undefined}>
+              <Row label={title} width={labelWidth}>
+                <p>
+                  {p.description.join(" ")}
+                  {p.visibility && ` [${p.visibility}]`}
+                </p>
+                <p className="mt-1">stack: {p.stack.join(" / ")}</p>
+              </Row>
+            </div>
+          );
+        })}
+      </Box>
 
-      <Section label="CONTACT" />
-      <div className="text-fg">
+      <Box>
         {profile.links.map((l) => (
-          <div key={l.href} className="flex">
-            <span className="shrink-0 select-none whitespace-pre text-mute">
-              {l.label.padEnd(9)}:{" "}
-            </span>
+          <Row key={l.href} label={l.label} width={labelWidth}>
             <a
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-w-0 underline [overflow-wrap:anywhere]"
+              className="underline [overflow-wrap:anywhere]"
             >
               {l.text}
             </a>
-          </div>
+          </Row>
         ))}
-      </div>
-
-      <Gap />
-      <p className="text-dim">
-        (c) {new Date().getFullYear()} {profile.name}
-      </p>
+      </Box>
     </main>
   );
 }

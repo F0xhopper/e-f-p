@@ -1,11 +1,9 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { profile } from "./lib/content";
 
-/* Generated social card: a black terminal window rendered in Monocraft,
-   monochrome to match the site. Shared links (X, Slack, iMessage) pull
-   this instead of a blank rectangle. */
+/* Generated social card: a black terminal window, monochrome to match
+   the site. Shared links (X, Slack, iMessage) pull this instead of a
+   blank rectangle. */
 
 export const alt = `${profile.name} — ${profile.role}`;
 export const size = { width: 1200, height: 630 };
@@ -17,10 +15,6 @@ const DIM = "#6e6e6e";
 const FAINT = "#3a3a3a";
 
 export default async function Image() {
-  const monocraft = await readFile(
-    join(process.cwd(), "app/fonts/Monocraft.ttf")
-  );
-
   return new ImageResponse(
     (
       <div
@@ -29,7 +23,7 @@ export default async function Image() {
           height: "100%",
           background: "#000000",
           color: FG,
-          fontFamily: "Monocraft",
+          fontFamily: "monospace",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -100,11 +94,6 @@ export default async function Image() {
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: [
-        { name: "Monocraft", data: monocraft, style: "normal", weight: 400 },
-      ],
-    }
+    size
   );
 }

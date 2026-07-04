@@ -7,19 +7,13 @@
 :root {
   --bg: #000000;
   --fg: #ffffff;
-
-  /* Monochrome grades: hierarchy comes from brightness, not hue. */
-  --mute: #b3b3b3; /* secondary text: labels */
-  --dim: #6e6e6e; /* tertiary: rules, gutters, meta */
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-fg: var(--fg);
-  --color-mute: var(--mute);
-  --color-dim: var(--dim);
-  --font-mono: var(--font-monocraft), ui-monospace, "SFMono-Regular", "Menlo",
-    monospace;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Consolas",
+    "Liberation Mono", monospace;
 }
 
 * {
@@ -40,7 +34,7 @@ body {
 }
 
 /* Tailwind's preflight resets pre/code/kbd/samp to the browser's default
-   monospace stack. Override so our ASCII art inherits Monocraft. */
+   monospace stack. Override so our ASCII art inherits the site's mono font. */
 pre,
 code,
 kbd,
