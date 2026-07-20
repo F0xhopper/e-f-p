@@ -30,10 +30,9 @@ function Row({
 }
 
 export default function Home() {
-  const labelWidth = Math.max(
-    ...projects.map((p) => p.title.length),
-    ...profile.links.map((l) => l.label.length)
-  );
+  // +3 reserves room for the "01 " catalogue-id prefix on every project row.
+  const projectLabelWidth = Math.max(...projects.map((p) => p.title.length + 3));
+  const linkLabelWidth = Math.max(...profile.links.map((l) => l.label.length));
 
   return (
     <main className="term mx-auto max-w-[72ch] px-4 py-12 text-fg">
@@ -46,21 +45,26 @@ export default function Home() {
       <Box>
         {projects.map((p, i) => {
           const link = p.links?.[0];
-          const title = link ? (
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            >
-              {p.title}
-            </a>
-          ) : (
-            p.title
+          const title = (
+            <>
+              <span className="text-fg-dim">{p.id}</span>{" "}
+              {link ? (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  {p.title}
+                </a>
+              ) : (
+                p.title
+              )}
+            </>
           );
           return (
             <div key={p.id} className={i > 0 ? "mt-6" : undefined}>
-              <Row label={title} width={labelWidth}>
+              <Row label={title} width={projectLabelWidth}>
                 <p>{p.description.join(" ")}</p>
                 {p.image && (
                   <Image
@@ -68,7 +72,6 @@ export default function Home() {
                     alt={p.image.alt}
                     width={p.image.width}
                     height={p.image.height}
-                    unoptimized // resampling would smear the 1-bit dither
                     className="mt-3"
                   />
                 )}
@@ -82,7 +85,7 @@ export default function Home() {
 
       <Box>
         {profile.links.map((l) => (
-          <Row key={l.href} label={l.label} width={labelWidth}>
+          <Row key={l.href} label={l.label} width={linkLabelWidth}>
             <a
               href={l.href}
               target="_blank"

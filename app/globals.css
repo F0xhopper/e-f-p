@@ -74,15 +74,9 @@ samp {
   outline: none;
 }
 
-/* Screenshots are pre-dithered to 1-bit (scripts/dither.mjs) and shown
-   at their intrinsic pixel size -- an integer scale, so every dither dot
-   stays uniform. Stretching to the column would land on a fractional
-   scale and render the grain unevenly (moire). Only narrow viewports
-   shrink them, where high-DPR screens hide the remainder. */
 .term img {
   max-width: 100%;
   height: auto;
-  image-rendering: pixelated;
 }
 
 /* Responsive banner: scale ONLY the ASCII art so its ~45 fixed columns
