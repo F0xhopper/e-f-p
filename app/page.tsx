@@ -51,7 +51,7 @@ function Box({
         <div>
           <span className="text-fg-dim">{id}</span> {title}
         </div>
-        <div className="pt-2">{children}</div>
+        <div className="pt-3">{children}</div>
       </div>
     );
   }
