@@ -79,10 +79,44 @@ samp {
   height: auto;
 }
 
+/* ------------------------------------------------------------------ *
+ *  CRT/terminal treatment for screenshots shown in the retro viewer:
+ *  grayscale duotone (same white-on-black family as the text) + faint
+ *  scanlines, so a screenshot reads as part of the monochrome shell.
+ *  For green phosphor instead of grey, add
+ *  `sepia(1) hue-rotate(65deg) saturate(2.2)` to the filter below.
+ * ------------------------------------------------------------------ */
+.crt {
+  position: relative;
+  display: inline-block;
+  line-height: 0; /* kill inline-block descender gap under the image */
+  overflow: hidden;
+}
+.crt img {
+  filter: grayscale(1) contrast(1.12) brightness(0.95);
+}
+/* scanlines: 1px dark line every 3px, riding over the image */
+.crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.5) 2px,
+    rgba(0, 0, 0, 0.5) 3px
+  );
+}
+
 /* Responsive banner: scale ONLY the ASCII art so its ~45 fixed columns
    always fit the viewport, capping at the body size on wider screens.
    Body text stays at a fixed, readable size everywhere. */
 .banner {
-  font-size: clamp(0.5rem, calc((100vw - 2rem) / 28), 0.9375rem);
+  /* Divisor ~= the wordmark's widest line in columns, so the fixed-width
+     figlet art always fits inside the page's content box (100vw - 2rem of
+     padding) on narrow screens, capping at the body size on wide ones. */
+  font-size: clamp(0.5rem, calc((100vw - 2rem) / 34), 0.9375rem);
   line-height: 1.3;
 }
