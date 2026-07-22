@@ -6,7 +6,7 @@
 export const profile = {
   name: "eden fox phillips",
   handle: "e-f-p",
-  role: "designer / developer / maker",
+  role: "designer / engineer / maker",
   links: [
     { label: "email", href: "mailto:foxhopper16@gmail.com", text: "foxhopper16@gmail.com" },
     { label: "github", href: "https://github.com/e-f-p", text: "e-f-p" },
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     id: "01",
     title: "lumen",
     stack: ["typescript", "next.js", "postgres", "pgvector", "claude api"],
-    links: [{ label: "code", href: "https://github.com/e-f-p/lumen" }],
+    links: [{ label: "site", href: "https://lumen-five-tau.vercel.app/" }],
     description: [
       "a study companion for the summa theologica: full text, semantic search,",
       "notes, and an agent that reasons over the corpus alongside you.",
@@ -49,7 +49,6 @@ export const projects: Project[] = [
     id: "02",
     title: "altum",
     stack: ["go", "bubbletea", "sqlite"],
-    links: [{ label: "code", href: "https://github.com/e-f-p/altum" }],
     description: [
       "a minimalist cli deep work companion for the terminal. no noise --",
       "just you, a timer, and the work.",
@@ -65,7 +64,6 @@ export const projects: Project[] = [
     id: "03",
     title: "peritus",
     stack: ["python", "networkx", "claude api"],
-    links: [{ label: "code", href: "https://github.com/e-f-p/peritus" }],
     description: [
       "cli tool that fetches, validates, and graphs multi-source research on a",
       "topic, then lets you chat with a generated expert persona grounded in",
@@ -98,7 +96,6 @@ export const projects: Project[] = [
     id: "05",
     title: "atlas temporum",
     stack: ["typescript", "next.js", "maplibre", "go", "postgis"],
-    links: [{ label: "code", href: "https://github.com/F0xhopper/Atlas-Temporum" }],
     description: [
       "interactive map of medieval britain, 1000--1500. one control drives",
       "everything -- slide the timeline year and watch the map change.",
@@ -108,11 +105,21 @@ export const projects: Project[] = [
     id: "06",
     title: "importo",
     stack: ["typescript", "shopify api", "docker"],
-    links: [{ label: "code", href: "https://github.com/F0xhopper/Importo" }],
     description: [
       "drag-and-drop shopify importer -- turns pdf catalogs, spreadsheets,",
       "and images into ready-to-sell products with titles, prices, variants,",
       "and inventory extracted automatically.",
+    ],
+  },
+  {
+    id: "07",
+    title: "aiserve247",
+    stack: ["c#", "next.js", "mongodb", "azure", "openai"],
+    description: [
+      "an ai-powered chatbot that automates repetitive customer support,",
+      "helping businesses save time and boost efficiency. alongside its",
+      "conversational ai, a polished crm centralises customer data and",
+      "tracks interactions.",
     ],
   },
 ];

@@ -1,13 +1,12 @@
 import Banner from "./components/Banner";
-import Screenshot from "./components/Screenshot";
 import { about, profile, projects, type Project } from "./lib/content";
 
 /* ------------------------------------------------------------------ *
  *  cheat.sh cosplay, drawn for real: the project frames are literal
  *  ASCII characters -- "+" corners, "-" top/bottom, "|" sides -- not
  *  CSS borders. The title rides in the top edge; the vertical sides are
- *  a column of stacked "|" clipped to the content height. Boxes are
- *  text only; a "[ screenshot ]" link opens the image in a retro viewer.
+ *  a column of stacked "|" clipped to the content height. Projects are
+ *  text only; frame style is set once via BOX_FRAME below.
  * ------------------------------------------------------------------ */
 
 const BOX_COLS = 38; // full width of each frame, in monospace columns
@@ -27,13 +26,47 @@ function bottomEdge() {
   return "+" + "-".repeat(BOX_COLS - 2) + "+";
 }
 
+/* Frame style for every project block. "none" = just a text title with
+   no lines; "rule" = a titled top rule ("+-- 01 · lumen --+"); "box" =
+   the full "+---+ | | +---+" frame. */
+type BoxFrame = "box" | "rule" | "none";
+const BOX_FRAME: BoxFrame = "none";
+
 function Box({
-  caption,
+  id,
+  title,
   children,
 }: {
-  caption: string;
+  id: string;
+  title: string;
   children: React.ReactNode;
 }) {
+  const caption = `${id} ${title}`;
+
+  if (BOX_FRAME === "none") {
+    return (
+      <div>
+        {/* dim id, bright name -- the title anchors each project now
+            that there are no lines separating them. */}
+        <div>
+          <span className="text-fg-dim">{id}</span> {title}
+        </div>
+        <div className="pt-2">{children}</div>
+      </div>
+    );
+  }
+
+  if (BOX_FRAME === "rule") {
+    return (
+      <div className="w-[38ch] shrink-0">
+        <div className="whitespace-pre leading-none text-fg-dim">
+          {topEdge(caption)}
+        </div>
+        <div className="w-[38ch] pt-2">{children}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-[38ch] shrink-0">
       <div className="whitespace-pre leading-none text-fg-dim">
@@ -64,7 +97,7 @@ function Box({
 function ProjectBox({ p }: { p: Project }) {
   const link = p.links?.[0];
   return (
-    <Box caption={`${p.id} · ${p.title}`}>
+    <Box id={p.id} title={p.title}>
       <p className="[overflow-wrap:anywhere]">{p.description.join(" ")}</p>
       {link && (
         <p className="mt-1 [overflow-wrap:anywhere]">
@@ -76,17 +109,6 @@ function ProjectBox({ p }: { p: Project }) {
           >
             {link.href.replace(/^https?:\/\//, "")}
           </a>
-        </p>
-      )}
-      {p.image && (
-        <p className="mt-1">
-          <Screenshot
-            src={p.image.src}
-            alt={p.image.alt}
-            width={p.image.width}
-            height={p.image.height}
-            name={p.title}
-          />
         </p>
       )}
       <p className="mt-1 text-fg-dim [overflow-wrap:anywhere]">
@@ -109,13 +131,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* project frames */}
-      <div className="mt-12 overflow-x-auto pb-2">
-        <div className="flex flex-wrap gap-x-6 gap-y-8">
-          {projects.map((p) => (
-            <ProjectBox key={p.id} p={p} />
-          ))}
-        </div>
+      {/* project list -- fluid responsive grid: 1 col on mobile, 2 on
+          small screens, 3 on large */}
+      <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => (
+          <ProjectBox key={p.id} p={p} />
+        ))}
       </div>
 
       {/* bracketed footer of contact links */}
