@@ -112,7 +112,7 @@ function ProjectBox({ p }: { p: Project }) {
         </p>
       )}
       <p className="mt-1 text-fg-dim [overflow-wrap:anywhere]">
-        # {p.stack.join(" · ")}
+        {p.stack.join(" · ")}
       </p>
     </Box>
   );
@@ -139,11 +139,11 @@ export default function Home() {
         ))}
       </div>
 
-      {/* bracketed footer of contact links */}
-      <div className="mt-12 flex flex-wrap gap-x-3 gap-y-2 text-fg-dim">
+      {/* footer of contact links */}
+      <div className="mt-12 flex flex-wrap gap-x-6 gap-y-2 text-fg-dim">
         {profile.links.map((l) => (
           <span key={l.href} className="whitespace-nowrap">
-            [<span className="text-fg-dim">{l.label}: </span>
+            <span className="text-fg-dim">{l.label} </span>
             <a
               href={l.href}
               target="_blank"
@@ -152,7 +152,6 @@ export default function Home() {
             >
               {l.text.replace(/^mailto:/, "")}
             </a>
-            ]
           </span>
         ))}
       </div>
