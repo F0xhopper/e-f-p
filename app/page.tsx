@@ -94,11 +94,44 @@ function Box({
   );
 }
 
+/* Contact block, in the header where people look first. One link per
+   line; labels are padded so the values line up in a column, like
+   aligned output from a shell command. */
+function ContactLinks() {
+  const pad = Math.max(...profile.links.map((l) => l.label.length)) + 2;
+  return (
+    <div className="text-fg-dim">
+      {profile.links.map((l) => (
+        <div key={l.href}>
+          <span className="whitespace-pre text-fg-dim">
+            {l.label.padEnd(pad)}
+          </span>
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline [overflow-wrap:anywhere]"
+          >
+            {l.text.replace(/^mailto:/, "")}
+          </a>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ProjectBox({ p }: { p: Project }) {
   const link = p.links?.[0];
   return (
     <Box id={p.id} title={p.title}>
       <p className="[overflow-wrap:anywhere]">{p.description.join(" ")}</p>
+      {/* the one concrete result, styled as the project's output line */}
+      {p.outcome && (
+        <p className="mt-1 [overflow-wrap:anywhere]">
+          <span className="text-fg-dim">&gt; </span>
+          {p.outcome}
+        </p>
+      )}
       {link && (
         <p className="mt-1 [overflow-wrap:anywhere]">
           <a
@@ -107,7 +140,7 @@ function ProjectBox({ p }: { p: Project }) {
             rel="noopener noreferrer"
             className="underline"
           >
-            {link.href.replace(/^https?:\/\//, "")}
+            {link.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
           </a>
         </p>
       )}
@@ -128,6 +161,10 @@ export default function Home() {
           <p className="text-fg">{profile.role}</p>
           <p className="mt-3">{about[0]}</p>
           <p>{about[1]}</p>
+          {/* contact, above the fold */}
+          <div className="mt-3">
+            <ContactLinks />
+          </div>
         </div>
       </div>
 
@@ -136,23 +173,6 @@ export default function Home() {
       <div className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
           <ProjectBox key={p.id} p={p} />
-        ))}
-      </div>
-
-      {/* footer of contact links */}
-      <div className="mt-12 flex flex-wrap gap-x-6 gap-y-2 text-fg-dim">
-        {profile.links.map((l) => (
-          <span key={l.href} className="whitespace-nowrap">
-            <span className="text-fg-dim">{l.label} </span>
-            <a
-              href={l.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline [overflow-wrap:anywhere]"
-            >
-              {l.text.replace(/^mailto:/, "")}
-            </a>
-          </span>
         ))}
       </div>
     </main>
