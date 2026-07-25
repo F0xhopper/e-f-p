@@ -21,7 +21,7 @@ const jetbrains = localFont({
   variable: "--font-jetbrains",
 });
 
-const tabTitle = `eden@${profile.handle}:~ · ${profile.name}, ${profile.role}`;
+const tabTitle = `eden@${profile.handle}:~`;
 const title = `${profile.name} — ${profile.role}`;
 const description = `${profile.role}. ${profile.name} builds tools, interfaces, and production software — lumen, studio apply, aiserve247, importo.`;
 
