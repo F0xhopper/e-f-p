@@ -1,46 +1,51 @@
-/* ================================================================== *
- *  EDIT THIS FILE TO MAKE THE SITE YOURS.
- *  Everything the portfolio renders comes from the data below.
- * ================================================================== */
-
 export const profile = {
   name: "eden fox phillips",
   handle: "e-f-p",
   role: "design engineer",
   links: [
-    { label: "email", href: "mailto:edenfoxphillips@proton.me", text: "edenfoxphillips@proton.me" },
-    { label: "github", href: "https://github.com/e-f-p", text: "e-f-p" },
-    { label: "linkedin", href: "https://linkedin.com/in/eden-fox-phillips", text: "eden-fox-phillips" },
+    {
+      label: "email",
+      href: "mailto:edenfoxphillips@proton.me",
+      text: "edenfoxphillips@proton.me",
+    },
+    { label: "github", href: "https://github.com/F0xhopper", text: "F0xhopper" },
+    {
+      label: "linkedin",
+      href: "https://www.linkedin.com/in/eden-phillips-8a588b298/",
+      text: "eden-phillips-8a588b298",
+    },
   ],
 };
 
 export const about = [
-  "i design and ship tools, interfaces, and the occasional ridiculous experiment.",
-  "i like systems that feel like instruments -- fast, legible, a little bit retro.",
+  "i build useful tools, systems, and applications end to end -- design through deployment.",
+  "recent work: ai-assisted study software, multi-tenant saas, and e-commerce automation.",
+  "when something doesn't need a ui, i build it for the terminal instead.",
 ];
 
+export type ProjectLink = { label: string; href: string };
+
 export type Project = {
-  id: string; // 2-digit catalogue id, e.g. "01"
+  id: string;
   title: string;
+  year?: string;
   stack: string[];
   description: string[];
-  // One concrete, TRUE result -- a number beats an adjective ("12 studios
-  // onboarded", "cut import time from 2h to 4min"). Rendered as a "> " line
-  // on the card. Leave unset until you have a real one; never invent it.
   outcome?: string;
-  // EVERY project should carry at least one link -- live site or repo.
-  // A card with no link is an unverifiable claim.
-  links?: { label: string; href: string }[];
+  links?: ProjectLink[];
 };
 
 export const projects: Project[] = [
   {
     id: "01",
     title: "lumen",
+    year: "2026",
     stack: ["typescript", "next.js", "postgres", "pgvector", "claude api"],
-    // TODO(outcome): e.g. "full 3,000+ article corpus, semantic search in <Xs"
     outcome: "live -- the full summa, searchable end to end",
-    links: [{ label: "site", href: "https://lumen-five-tau.vercel.app/" }],
+    links: [
+      { label: "site", href: "https://lumen-five-tau.vercel.app/" },
+      { label: "source", href: "https://github.com/F0xhopper/Lumen" },
+    ],
     description: [
       "a study companion for the summa theologica: full text, semantic search,",
       "notes, and an agent that reasons over the corpus alongside you.",
@@ -48,36 +53,9 @@ export const projects: Project[] = [
   },
   {
     id: "02",
-    title: "altum",
-    stack: ["go", "bubbletea", "sqlite"],
-    // TODO(outcome): upgrade to a real number, e.g. "N hours of deep work logged"
-    outcome: "a timer, a log, and nothing else",
-    // TODO(link): EXAMPLE url -- replace with the real deployed site
-    links: [{ label: "site", href: "https://altum.vercel.app" }],
-    description: [
-      "a minimalist cli deep work companion for the terminal. no noise --",
-      "just you, a timer, and the work.",
-    ],
-  },
-  {
-    id: "03",
-    title: "peritus",
-    stack: ["python", "networkx", "claude api"],
-    // TODO(outcome): upgrade to a real number, e.g. "N sources validated per topic"
-    outcome: "one command from topic to expert",
-    // TODO(link): EXAMPLE url -- replace with the real deployed site
-    links: [{ label: "site", href: "https://peritus.vercel.app" }],
-    description: [
-      "cli tool that fetches, validates, and graphs multi-source research on a",
-      "topic, then lets you chat with a generated expert persona grounded in",
-      "that corpus.",
-    ],
-  },
-  {
-    id: "04",
     title: "studio apply",
+    year: "2025",
     stack: ["typescript", "next.js", "supabase", "tailwind", "vercel"],
-    // TODO(outcome): replace with a real number, e.g. "N studios onboarded"
     outcome: "in production at studioapply.com",
     links: [{ label: "site", href: "https://studioapply.com" }],
     description: [
@@ -86,26 +64,25 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "05",
-    title: "atlas temporum",
-    stack: ["typescript", "next.js", "maplibre", "go", "postgis"],
-    // TODO(outcome): upgrade to a real number, e.g. "N mapped places"
-    outcome: "five centuries on one slider",
-    // TODO(link): EXAMPLE url -- replace with the real deployed site
-    links: [{ label: "site", href: "https://atlas-temporum.vercel.app" }],
+    id: "03",
+    title: "aiserve247",
+    year: "2024",
+    stack: ["c#", "next.js", "mongodb", "azure", "openai"],
+    outcome: "support that answers at 3am",
+    links: [{ label: "site", href: "https://aiserve247.com" }],
     description: [
-      "interactive map of medieval britain, 1000--1500. one control drives",
-      "everything -- slide the timeline year and watch the map change.",
+      "customer support chatbot with an integrated crm: automated responses",
+      "to routine enquiries, with customer records and conversation history",
+      "in one place.",
     ],
   },
   {
-    id: "06",
+    id: "04",
     title: "importo",
+    year: "2025",
     stack: ["typescript", "shopify api", "docker"],
-    // TODO(outcome): upgrade to a real number, e.g. "N-page catalog -> store in N min"
     outcome: "catalog in, storefront out",
-    // TODO(link): EXAMPLE url -- replace with the real deployed site
-    links: [{ label: "site", href: "https://importo.vercel.app" }],
+    links: [{ label: "site", href: "https://apps.shopify.com/importo" }],
     description: [
       "drag-and-drop shopify importer -- turns pdf catalogs, spreadsheets,",
       "and images into ready-to-sell products with titles, prices, variants,",
@@ -113,18 +90,58 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "07",
-    title: "aiserve247",
-    stack: ["c#", "next.js", "mongodb", "azure", "openai"],
-    // TODO(outcome): upgrade to a real number, e.g. "resolves N% of tickets unaided"
-    outcome: "support that answers at 3am",
-    // TODO(link): EXAMPLE url -- verify this is the live product before deploying
-    links: [{ label: "site", href: "https://aiserve247.com" }],
+    id: "05",
+    title: "servite",
+    year: "2026",
+    stack: ["typescript", "next.js", "tailwind", "vercel"],
+    outcome: "live -- eight centuries of order history, one site",
+    links: [
+      { label: "site", href: "https://servite-snowy.vercel.app" },
+      { label: "source", href: "https://github.com/F0xhopper/Servite" },
+    ],
     description: [
-      "an ai-powered chatbot that automates repetitive customer support,",
-      "helping businesses save time and boost efficiency. alongside its",
-      "conversational ai, a polished crm centralises customer data and",
-      "tracks interactions.",
+      "website for the secular order of the servants of mary: order history",
+      "from its 1233 founding, spirituality, patron saints, event calendar,",
+      "and membership enquiries.",
+    ],
+  },
+  {
+    id: "06",
+    title: "atlas temporum",
+    year: "2026",
+    stack: ["typescript", "next.js", "maplibre", "go", "postgis"],
+    outcome: "five centuries on one slider",
+    links: [
+      { label: "source", href: "https://github.com/F0xhopper/Atlas-Temporum" },
+    ],
+    description: [
+      "interactive map of medieval britain, 1000--1500. one control drives",
+      "everything -- slide the timeline year and watch the map change.",
+    ],
+  },
+  {
+    id: "07",
+    title: "peritus",
+    year: "2026",
+    stack: ["python", "networkx", "claude api"],
+    outcome: "one command from topic to expert",
+    links: [{ label: "source", href: "https://github.com/F0xhopper/Peritus" }],
+    description: [
+      "cli tool that fetches, validates, and graphs multi-source research on a",
+      "topic, then lets you chat with a generated expert persona grounded in",
+      "that corpus.",
+    ],
+  },
+  {
+    id: "08",
+    title: "altum",
+    year: "2026",
+    stack: ["go", "bubbletea", "sqlite"],
+    outcome: "a timer, a log, and nothing else",
+    links: [{ label: "source", href: "https://github.com/F0xhopper/Altum" }],
+    description: [
+      "a minimalist cli deep work companion for the terminal. no noise --",
+      "just you, a timer, and the work.",
     ],
   },
 ];

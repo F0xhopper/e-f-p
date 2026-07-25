@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------ *
- *  e-f-p // plain terminal: monospace text, near-white on near-black.
- *  Two tones only: fg for content, fg-dim for metadata.
- * ------------------------------------------------------------------ */
-
 :root {
   --bg: #000000;
   --fg: #e6e6e6;
@@ -15,8 +10,8 @@
   --color-bg: var(--bg);
   --color-fg: var(--fg);
   --color-fg-dim: var(--fg-dim);
-  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Consolas",
-    "Liberation Mono", monospace;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", "Menlo",
+    "Consolas", "Liberation Mono", monospace;
 }
 
 * {
@@ -32,12 +27,10 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-mono);
-  font-feature-settings: "liga" 0, "calt" 0; /* keep glyphs literal */
+  font-feature-settings: "liga" 0, "calt" 0;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Tailwind's preflight resets pre/code/kbd/samp to the browser's default
-   monospace stack. Override so they inherit the site's mono font. */
 pre,
 code,
 kbd,
@@ -48,21 +41,23 @@ samp {
 }
 
 .term {
-  font-size: 0.9375rem; /* 15px */
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 
-/* inverse selection, like a terminal cursor sweep */
+.t-meta {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
 ::selection {
   background: var(--fg);
   color: var(--bg);
 }
 
-/* Links are underlined, with the line dropped clear of descenders;
-   on hover or keyboard focus the cursor "sweeps" the cell -- the cell
-   inverts and the glyph goes dark. */
 .term a {
   color: var(--fg);
+  text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.15em;
 }
@@ -74,18 +69,7 @@ samp {
   outline: none;
 }
 
-.term img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Responsive banner: scale ONLY the ASCII art so its ~45 fixed columns
-   always fit the viewport, capping at the body size on wider screens.
-   Body text stays at a fixed, readable size everywhere. */
 .banner {
-  /* Divisor ~= the wordmark's widest line in columns, so the fixed-width
-     figlet art always fits inside the page's content box (100vw - 2rem of
-     padding) on narrow screens, capping at the body size on wide ones. */
-  font-size: clamp(0.5rem, calc((100vw - 2rem) / 34), 0.9375rem);
-  line-height: 1.3;
+  font-size: clamp(0.5rem, calc((100vw - 2rem) / 28), 1.25rem);
+  line-height: 1.15;
 }

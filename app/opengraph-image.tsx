@@ -4,11 +4,6 @@ import { ImageResponse } from "next/og";
 import { BANNER } from "./lib/banner";
 import { profile } from "./lib/content";
 
-/* Generated social card: the site's figlet wordmark on jet black, in the
-   site's exact palette -- a shared link looks like the page it opens.
-   Satori's default font is proportional, which would shred the ASCII
-   alignment, so a real monospace font is embedded from assets/fonts/. */
-
 export const alt = `${profile.name} — ${profile.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

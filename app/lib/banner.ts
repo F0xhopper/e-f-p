@@ -1,8 +1,3 @@
-/* ASCII-art wordmark spelling "Eden Fox Phillips", stacked over two
-   blocks so each stays within ~45 columns. Classic figlet "standard"
-   font -- the look of a Linux terminal banner. Single source of truth:
-   rendered by the page header and the Open Graph card. */
-
 export const BANNER = [
   " _____ ____  _____ _   _   _____ _____  __",
   "| ____|  _ \\| ____| \\ | | |  ___/ _ \\ \\/ /",
