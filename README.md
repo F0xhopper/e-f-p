@@ -1,6 +1,6 @@
 # e-f-p
 
-Personal site of Eden Fox Phillips, design engineer.
+Personal site of Eden Fox Phillips, builder.
 
 Live at [e-f-p.com](https://www.e-f-p.com/).
 

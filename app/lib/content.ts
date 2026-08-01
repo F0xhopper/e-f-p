@@ -1,7 +1,7 @@
 export const profile = {
   name: "eden fox phillips",
   handle: "e-f-p",
-  role: "design engineer",
+  role: "builder",
   links: [
     {
       label: "email",
@@ -91,18 +91,17 @@ export const projects: Project[] = [
   },
   {
     id: "05",
-    title: "servite",
+    title: "cognita",
     year: "2026",
-    stack: ["typescript", "next.js", "tailwind", "vercel"],
-    outcome: "live -- eight centuries of order history, one site",
+    stack: ["python", "mcp", "postgres", "pgvector", "docker"],
+    outcome: "every answer traced back to the page",
     links: [
-      { label: "site", href: "https://servite-snowy.vercel.app" },
-      { label: "source", href: "https://github.com/F0xhopper/Servite" },
+      { label: "source", href: "https://github.com/F0xhopper/Cognita-MCP" },
     ],
     description: [
-      "website for the secular order of the servants of mary: order history",
-      "from its 1233 founding, spirituality, patron saints, event calendar,",
-      "and membership enquiries.",
+      "an mcp server that lets your ai agent search your personal library --",
+      "ingest pdfs and epubs, then get answers with citations down to the",
+      "page.",
     ],
   },
   {
