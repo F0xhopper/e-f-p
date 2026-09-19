@@ -122,13 +122,13 @@ export const projects: Project[] = [
     id: "07",
     title: "peritus",
     year: "2026",
-    stack: ["python", "networkx", "claude api"],
-    outcome: "one command from topic to expert",
+    stack: ["python", "fastapi", "postgres", "pgvector", "rust", "claude api"],
+    outcome: "every source kept or dropped, on the record",
     links: [{ label: "source", href: "https://github.com/F0xhopper/Peritus" }],
     description: [
-      "cli tool that fetches, validates, and graphs multi-source research on a",
-      "topic, then lets you chat with a generated expert persona grounded in",
-      "that corpus.",
+      "research agent that turns any topic into a vetted library: it searches",
+      "eleven kinds of source, keeps only what holds up, and answers your",
+      "questions with a checked citation behind every claim.",
     ],
   },
   {
@@ -141,6 +141,19 @@ export const projects: Project[] = [
     description: [
       "a minimalist cli deep work companion for the terminal. no noise --",
       "just you, a timer, and the work.",
+    ],
+  },
+  {
+    id: "09",
+    title: "logica",
+    year: "2026",
+    stack: ["typescript", "react", "react flow", "hono", "claude api"],
+    outcome: "every node anchored to a quote",
+    links: [{ label: "source", href: "https://github.com/F0xhopper/logica" }],
+    description: [
+      "argument mapping tool -- paste an essay, article, or debate and watch",
+      "it stream into an interactive map of claims, premises, evidence, and",
+      "objections.",
     ],
   },
 ];
