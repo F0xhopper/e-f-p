@@ -1,4 +1,4 @@
-import { profile, projects } from "../app/lib/content.ts";
+import { hire, profile, projects } from "../app/lib/content.ts";
 
 type Row = { where: string; href: string; status: string; ok: boolean };
 
@@ -29,6 +29,7 @@ async function probe(href: string): Promise<{ status: string; ok: boolean }> {
 
 const targets: { where: string; href: string }[] = [
   ...profile.links.map((l) => ({ where: `profile/${l.label}`, href: l.href })),
+  { where: "profile/hire", href: hire.href },
   ...projects.flatMap((p) =>
     (p.links ?? []).map((l) => ({ where: `${p.title}/${l.label}`, href: l.href }))
   ),

@@ -63,10 +63,36 @@ samp {
 }
 .term a:hover,
 .term a:focus-visible {
-  background: currentColor;
+  background: var(--fg);
   color: var(--bg);
   text-decoration: none;
   outline: none;
+}
+
+.term a.cta {
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0 1ch;
+}
+.term a.cta:hover,
+.term a.cta:focus-visible {
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--fg);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid color-mix(in srgb, var(--fg-dim) 50%, transparent);
+  filter: grayscale(1);
+}
+.card:hover .shot img,
+.card:focus-within .shot img {
+  border-color: var(--fg);
 }
 
 .banner {

@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Banner from "./components/Banner";
-import { about, profile, projects, type Project } from "./lib/content";
+import { about, hire, profile, projects, type Project } from "./lib/content";
 
 function ContactLinks() {
   const pad = Math.max(...profile.links.map((l) => l.label.length)) + 2;
@@ -24,6 +25,23 @@ function ContactLinks() {
   );
 }
 
+function HireLink() {
+  return (
+    <a href={hire.href} className="cta">
+      {hire.label}
+    </a>
+  );
+}
+
+function SectionHeading({ id, text }: { id: string; text: string }) {
+  return (
+    <h2 id={id} className="flex items-center gap-[2ch] text-fg-dim">
+      {text}
+      <span aria-hidden="true" className="h-px flex-1 bg-fg-dim/40" />
+    </h2>
+  );
+}
+
 function Outcome({ text }: { text: string }) {
   return (
     <p className="mt-1 [overflow-wrap:anywhere]">
@@ -37,6 +55,39 @@ function Outcome({ text }: { text: string }) {
 
 function primaryLink(p: Project) {
   return p.links?.find((l) => l.label === "site") ?? p.links?.[0];
+}
+
+const SHOW_SHOTS = false;
+
+function Shot({ p }: { p: Project }) {
+  if (!SHOW_SHOTS || !p.shot) return null;
+  const link = primaryLink(p);
+  const img = (
+    <Image
+      src={p.shot.src}
+      alt={p.shot.alt}
+      width={p.shot.width}
+      height={p.shot.height}
+      sizes="(min-width: 1024px) 34rem, 100vw"
+    />
+  );
+  return (
+    <div className="shot mb-4">
+      {link ? (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={-1}
+          aria-hidden="true"
+        >
+          {img}
+        </a>
+      ) : (
+        img
+      )}
+    </div>
+  );
 }
 
 function TitleRow({ p }: { p: Project }) {
@@ -55,9 +106,7 @@ function TitleRow({ p }: { p: Project }) {
           p.title
         )}
       </h3>
-      {p.year && (
-        <span className="t-meta shrink-0 text-fg-dim">{p.year}</span>
-      )}
+      {p.year && <span className="t-meta shrink-0 text-fg-dim">{p.year}</span>}
     </div>
   );
 }
@@ -72,7 +121,8 @@ function Stack({ p }: { p: Project }) {
 
 function ProjectCard({ p }: { p: Project }) {
   return (
-    <li>
+    <li className="card">
+      <Shot p={p} />
       <TitleRow p={p} />
       <div className="pt-2">
         <p className="[overflow-wrap:anywhere]">{p.description.join(" ")}</p>
@@ -95,20 +145,34 @@ export default function Home() {
               <p key={line}>{line}</p>
             ))}
           </div>
+          <p className="mt-4">
+            <HireLink />
+          </p>
           <div className="mt-4">
             <ContactLinks />
           </div>
         </div>
       </header>
 
-      <ul
-        aria-label="work"
-        className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {projects.map((p) => (
-          <ProjectCard key={p.id} p={p} />
-        ))}
-      </ul>
+      <section aria-labelledby="work" className="mt-16">
+        <SectionHeading id="work" text="work" />
+        <ul className="mt-8 grid gap-x-10 gap-y-14 lg:grid-cols-2">
+          {projects.map((p) => (
+            <ProjectCard key={p.id} p={p} />
+          ))}
+        </ul>
+      </section>
+
+      <footer aria-labelledby="contact" className="mt-20">
+        <SectionHeading id="contact" text="contact" />
+        <p className="mt-6 max-w-[72ch]">{hire.prompt.join(" ")}</p>
+        <p className="mt-4">
+          <HireLink />
+        </p>
+        <div className="mt-4">
+          <ContactLinks />
+        </div>
+      </footer>
     </main>
   );
 }
